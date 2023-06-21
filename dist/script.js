@@ -15,13 +15,65 @@ __webpack_require__.r(__webpack_exports__);
 // import { bind } from "core-js/core/function";
 
 const modals = () => {
-  function bindModal(trigger, modal, close) {}
-  const callEngineerBtn = document.querySelector('.popup_engineer_btn'),
-    modalEngineer = document.querySelector('.popup_engineer'),
-    modalEngineerClose = document.querySelector('.popup_engineer .popup_close');
-  bindModal(callEngineerBtn, modalEngineer, modalEngineerClose);
+  function bindModal(triggerSelector, modalSelector, closeSelector) {
+    const trigger = document.querySelectorAll(triggerSelector),
+      modal = document.querySelector(modalSelector),
+      close = document.querySelector(closeSelector);
+    trigger.forEach(item => {
+      item.addEventListener('click', e => {
+        if (e.target) {
+          e.preventDefault();
+        }
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+        // document.body.addClass('modal-open');
+      });
+    });
+
+    close.addEventListener('click', () => {
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+      // document.body.removeClass('modal-open');
+    });
+
+    modal.addEventListener('click', e => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+        // document.body.removeClass('modal-open');
+      }
+    });
+  }
+
+  ;
+  function showModalByTime(selector, time) {
+    setTimeout(() => {
+      document.querySelector(selector).style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    }, time);
+  }
+  bindModal('.popup_engineer_btn', '.popup_engineer', '.popup_engineer .popup_close');
+  bindModal('.phone_link', '.popup', '.popup .popup_close');
+  // showModalByTime('.popup', 60000);
 };
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (modals);
+
+/***/ }),
+
+/***/ "./src/js/modules/tabs.js":
+/*!********************************!*\
+  !*** ./src/js/modules/tabs.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+const tabs = () => {};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (tabs);
 
 /***/ }),
 
@@ -13925,11 +13977,14 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _slider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./slider */ "./src/js/slider.js");
 /* harmony import */ var _modules_modals__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/modals */ "./src/js/modules/modals.js");
+/* harmony import */ var _modules_tabs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/tabs */ "./src/js/modules/tabs.js");
 // import { from } from 'core-js/core/array';
+
 
 
 window.addEventListener('DOMContentLoaded', () => {
   (0,_modules_modals__WEBPACK_IMPORTED_MODULE_1__["default"])();
+  (0,_modules_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])();
 });
 })();
 
