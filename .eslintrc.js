@@ -1,9 +1,10 @@
+// eslint-disable-next-line no-undef
 module.exports = {
 	'env': {
 		'browser': true,
 		'es2021': true
 	},
-	// 'extends': 'eslint:recommended',
+	'extends': 'eslint:recommended',
 	'overrides': [
 	],
 	'parserOptions': {
@@ -11,18 +12,18 @@ module.exports = {
 		'sourceType': 'module'
 	},
 	'rules': {
-		'indent': [
-			// 'warn',
-			'tab'
-		],
+		// 'indent': [
+		// 	'warn',
+		// 	'tab'
+		// ],
 		'linebreak-style': [
 			'error',
 			'windows'
 		],
-		'quotes': [
-			'error',
-			'single'
-		],
+		// 'quotes': [
+		// 	'error',
+		// 	'single'
+		// ],
 		'semi': [
 			'error',
 			'always'

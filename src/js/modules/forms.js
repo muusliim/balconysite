@@ -1,13 +1,13 @@
-const forms = () => {
-    const form = document.querySelectorAll('form'),
-          inputs = document.querySelectorAll('input'),
-          phoneInputs = document.querySelectorAll('input[name="user_phone"]');
+import checkNumInputs from "./checkNumInputs";
+import { closeModalByTime } from "./modals";
 
-    phoneInputs.forEach(item => {
-        item.addEventListener('input', () => {
-            item.value = item.value.replace(/\D/, '');
-        });
-    });
+
+const forms = (state) => {
+    const form = document.querySelectorAll('form'),
+          inputs = document.querySelectorAll('input');
+
+
+     checkNumInputs('input[name="user_phone"]');
 
     const message = {
         loading: 'Загрузка',
@@ -24,7 +24,7 @@ const forms = () => {
         });
 
         return await res.text();
-    }
+    };
 
     const clearInputs = () => {
        inputs.forEach(item => {
@@ -40,6 +40,11 @@ const forms = () => {
             item.append(statusMessage);
 
             const formData = new FormData(item);
+            if (item.getAttribute('data-calc') === 'end') {
+                for (let key in state) {
+                    formData.append(key, state[key]);
+                }
+            }
 
             postData('assets/server.php', formData)
                 .then(res => { 
@@ -52,8 +57,9 @@ const forms = () => {
                     setTimeout(() => {
                         statusMessage.remove();
                     }, 4000);
+                    closeModalByTime('.popup_calc_end', 5000);
                 });
-        })
+        });
     });
 };
 
